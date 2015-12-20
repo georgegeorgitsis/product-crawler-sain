@@ -16,7 +16,6 @@ This application is based on MVC.
 
 Sainsbury product crawler uses a number of open source projects and libraries to work properly:
 
-* [WAMP] - WampServer is a Windows web development environment. It allows you to create web applications with Apache2, PHP and a MySQL database.
 * [PHP] - PHP version used is 5.5.12
 * [CodeIgniter 3.0] - MVC framework
 * [Simple HTML dom] - [@http://thephpx.com/2009/10/php-simple-html-dom-parser-codeigniter-integration/]
