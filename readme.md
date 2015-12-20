@@ -28,7 +28,9 @@ To run it as console application
  - Open cmd and point to the sainsbury root folder
  - Type php index.php in cmd and get the results
 
+```sh
 $ php index.php
+```
 
 ### Unit Testing
 
