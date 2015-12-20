@@ -40,17 +40,18 @@ class Parser_model extends CI_Model {
         //For each product 
         foreach ($products as $product) {
             //We use a temp array to store our variables and then we push it into the $result array
+            //For each loop we initialize again the array
             $temp = array();
 
-            //The information we need for the url of the inner page and the title is located in an <a> element with an <h3> element as parent
+            //The information we need for the url of the inner page and the title is located in an <a> element with an <h3> element as a parent
             $title_info = $product->find('h3 > a')[0];
             $product_href = $title_info->href;
 
-            //Get product name
+            //Get the product name
             $product_title = $this->get_product_title($title_info);
 
-            //We use 2 functions to get the size in KB of the inner page of the product
-            $size_in_kb = $this->formatSizeUnits($this->get_remote_size($product_href));
+            //Get the bytes from the inner html page and convert it to KB
+            $size_in_kb = $this->format_size_units($this->get_remote_size($product_href));
 
             //Get the description of the product
             $product_description = $this->get_product_description($product_href);
@@ -61,7 +62,7 @@ class Parser_model extends CI_Model {
             //Calcurate the total price
             $total += $product_price;
 
-            //Add values to temp array and push it into results
+            //Add all values to temp array and push it into results
             $temp['title'] = $product_title;
             $temp['size'] = $size_in_kb;
             $temp['description'] = $product_description;
@@ -69,12 +70,18 @@ class Parser_model extends CI_Model {
 
             array_push($result, $temp);
         }
-        //Add the total to the result array. Because the example has no keys for each product, we use twice the total key, so we can use array values when we call it.
-        //In that way we can have each json element without key and the last element will have the key total
+        //Add the total to the result array. The example in pdf has no keys for the attributes in each product, 
+        //we use twice the total key, so we can use array values when we will call it.
+        //With array_values we can have each json elements without keys, but the last element will have the key name:total
         $result['total'] = array('total' => $total);
         return $result;
     }
-
+    
+    /**
+     * 
+     * @param type $title_info
+     * @return type string
+     */
     private function get_product_title($title_info) {
         //Get the inner text of the product's title
         $product_title = $title_info->innertext;
@@ -151,7 +158,7 @@ class Parser_model extends CI_Model {
      * @param type $bytes
      * @return string
      */
-    public function formatSizeUnits($bytes) {
+    public function format_size_units($bytes) {
         //This function converts the given bytes to byte,bytes,KB,MB,GB etc, regarding the specific size
         if ($bytes >= 1073741824) {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
