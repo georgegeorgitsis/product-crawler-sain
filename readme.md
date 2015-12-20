@@ -4,9 +4,9 @@ Sainsbury product crawler is an application which crawls the category page of Sa
 The result in json has each product's title, size of product's inner page in KB, product's description and the total price of all products.
 
 This application is based on MVC.
-The default controller is located in Application/Controllers/Sainsbury.php
-The model for this application is located in Application/Models/Parser_model.php
-The view for this application is located in Application/Views/sainsbury_view.php
+- The default controller is located in Application/Controllers/Sainsbury.php
+- The model for this application is located in Application/Models/Parser_model.php
+- The view for this application is located in Application/Views/sainsbury_view.php
 
 ### Version
 
